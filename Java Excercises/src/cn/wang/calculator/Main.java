@@ -3,7 +3,7 @@ package cn.wang.calculator;
 import javax.swing.JFrame;
 
 /**
- * 计算器入口类
+ * Calculator entrance 
  */
 public class Main {
 	public static void main(String[] args) {

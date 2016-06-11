@@ -161,7 +161,7 @@ public class CalFrame extends JFrame {
 			textField = new JTextField("0");
 			// Set uneditable
 			textField.setEditable(false);
-			// 设置背景为白色
+			// Set background white
 			textField.setBackground(Color.white);
 		}
 		return textField;
