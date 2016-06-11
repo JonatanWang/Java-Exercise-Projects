@@ -21,26 +21,26 @@ import java.awt.Dimension;
 public class CalFrame extends JFrame {
 	// Text Field to display result
 	private JTextField textField = null;
-	// 用一个数组保存MC,MR,MS,M+等操作符
+	// Array to save MC, MR, MS, M+
 	private String[] mOp = { "MC", "MR", "MS", "M+" };
-	// 用一个数组保存结果操作符
+	// Array to save result operations
 	private String[] rOp = { "Back", "CE", "C" };
-	// 靡桓鍪?楸４媸?钟肫渌?僮鞣?
+	// Array to save numbers and operations
 	private String[] nOp = { "7", "8", "9", "/", "sqrt", "4", "5", "6", "*",
 			"%", "1", "2", "3", "-", "1/x", "0", "+/-", ".", "+", "=" };
-	// M操作标志按钮
+	// Button for Memory buttons
 	private JButton button = null;
-	// 业务逻辑类
+	// Business logic class
 	private CalService service = new CalService();
-	// 定义监听器
+	// Define listener
 	private ActionListener actionListener = null;
-	// 设置panel的宽
+	// Panel width
 	private final int PRE_WIDTH = 360;
-	// 设置panel的高
+	// Panel Height
 	private final int PRE_HEIGHT = 250;
 
 	/**
-	 * 默认构造器
+	 * Default constructor
 	 */
 	public CalFrame() {
 		super();
@@ -48,55 +48,49 @@ public class CalFrame extends JFrame {
 	}
 
 	/**
-	 * 初始化界面
+	 * Init GUI
 	 * 
 	 * @return void
 	 */
 	private void initialize() {
-		// 设置窗口的标题
-		this.setTitle("计算器");
-		// 设置布局管理器
-		// this.setLayout( new BorderLayout(10,1) );
-		// 设置为不可改变大小
+		// Set the title of the window
+		this.setTitle("Calculator Standard");
+		// Set layout management
+		 this.setLayout( new BorderLayout(10,1) );
+		// Set window unresizable
 		this.setResizable(false);
-		// 增加计算输入框
+		// Set the input area
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout(10, 1));
 		panel.add(getTextField(), BorderLayout.NORTH);
 		panel.setPreferredSize(new Dimension(PRE_WIDTH, PRE_HEIGHT));
-		// 增加左边存储操作键
+		// Set M keys to the left
 		JButton[] mButton = getMButton();
-		// 新建一个panel，to place memory buttons	
+		// Panel，to place memory buttons	
 		JPanel panel1 = new JPanel();
-		// 设置布局管理器
+		// Set layout
 		panel1.setLayout(new GridLayout(5, 1, 0, 5));
-		// 迭代增加按钮
+		// Add the keys into panel
 		for (JButton b : mButton) {
 			panel1.add(b);
 		}
-		// 增加结果操作键
+		// Add result operation keys
 		JButton[] rButton = getRButton();
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new BorderLayout(1, 5));
-		// 新建一个panel，用于放置按钮
 		JPanel panel21 = new JPanel();
-		// 设置布局管理器
 		panel21.setLayout(new GridLayout(1, 3, 3, 3));
-		// 迭代增加按钮
 		for (JButton b : rButton) {
 			panel21.add(b);
 		}
-		// 增加数字与其它运算符
+		// Add numbers and other keys
 		JButton[] nButton = getNButton();
-		// 新建一个panel，用于放置按钮
 		JPanel panel22 = new JPanel();
-		// 设置布局管理器
 		panel22.setLayout(new GridLayout(4, 5, 3, 5));
-		// 迭代增加按钮
 		for (JButton b : nButton) {
 			panel22.add(b);
 		}
-		// 把新增加的面板加到frame
+		// Add panels to frame
 		panel2.add(panel21, BorderLayout.NORTH);
 		panel2.add(panel22, BorderLayout.CENTER);
 		panel.add(panel1, BorderLayout.WEST);
@@ -105,7 +99,7 @@ public class CalFrame extends JFrame {
 	}
 
 	/**
-	 * 这个方法用来获取监听器
+	 * Get the listener
 	 * 
 	 * @return ActionListener
 	 */
@@ -113,7 +107,7 @@ public class CalFrame extends JFrame {
 		if (actionListener == null) {
 			actionListener = new ActionListener() {
 				/**
-				 * 实现接口中的actionPerformed方法
+				 * Implement method actionPerformed from interface
 				 * 
 				 * @param e
 				 *            ActionEvent
@@ -123,18 +117,18 @@ public class CalFrame extends JFrame {
 					String cmd = e.getActionCommand();
 					String result = null;
 					try {
-						// 计算操作结果
+						// Calculate
 						result = service.callMethod(cmd, textField.getText());
 					} catch (Exception e1) {
 						System.out.println(e1.getMessage());
 					}
-					// 处理button的标记
+					// Deal M keys
 					if (cmd.indexOf("MC") == 0) {
 						button.setText("");
 					} else if (cmd.indexOf("M") == 0 && service.getStore() > 0) {
 						button.setText("M");
 					}
-					// 设置计算结果
+					// Set result
 					if (result != null) {
 						textField.setText(result);
 					}
@@ -157,15 +151,15 @@ public class CalFrame extends JFrame {
 	}
 
 	/**
-	 * 这个方法初始化输入框
+	 * Init input area
 	 * 
 	 * @return javax.swing.JTextField
 	 */
 	private JTextField getTextField() {
 		if (textField == null) {
-			// 设置默认值为0
+			// Set default 0
 			textField = new JTextField("0");
-			// 设置为不可编辑
+			// Set uneditable
 			textField.setEditable(false);
 			// 设置背景为白色
 			textField.setBackground(Color.white);
@@ -174,19 +168,17 @@ public class CalFrame extends JFrame {
 	}
 
 	/**
-	 * 此方法获得计算器的存储操作键
+	 * Get M keys
 	 * 
-	 * @return 保存JButton的数组
+	 * @return Array to save JButtons
 	 */
 	private JButton[] getMButton() {
 		JButton[] result = new JButton[mOp.length + 1];
 		result[0] = getButton();
 		for (int i = 0; i < this.mOp.length; i++) {
-			// 新建按钮
+			
 			JButton b = new JButton(this.mOp[i]);
-			// 为按钮增加事件
 			b.addActionListener(getActionListener());
-			// 设置按钮颜色
 			b.setForeground(Color.red);
 			result[i + 1] = b;
 		}
@@ -194,18 +186,16 @@ public class CalFrame extends JFrame {
 	}
 
 	/**
-	 * 此方法获得计算器的结果操作键
+	 * Get result operation keys
 	 * 
-	 * @return 保存JButton的数组
+	 * @return Array to save buttons
 	 */
 	private JButton[] getRButton() {
 		JButton[] result = new JButton[rOp.length];
 		for (int i = 0; i < this.rOp.length; i++) {
-			// 新建按钮
+
 			JButton b = new JButton(this.rOp[i]);
-			// 为按钮增加事件
 			b.addActionListener(getActionListener());
-			// 设置按钮颜色
 			b.setForeground(Color.red);
 			result[i] = b;
 		}
@@ -213,22 +203,21 @@ public class CalFrame extends JFrame {
 	}
 
 	/**
-	 * 此方法获得计算器的其它操作键
+	 * Get other keys
 	 * 
-	 * @return 保存JButton的数组
+	 * @return Array to save buttons
 	 */
 	private JButton[] getNButton() {
-		// 这个数组保存需要设置为红色的操作符
+		// Save the keys with red color
 		String[] redButton = { "/", "*", "-", "+", "=" };
 		JButton[] result = new JButton[nOp.length];
 		for (int i = 0; i < this.nOp.length; i++) {
-			// 新建按钮
+	
 			JButton b = new JButton(this.nOp[i]);
-			// 为按钮增加事件
 			b.addActionListener(getActionListener());
-			// 对redButton排序，才可以使用binarySearch方法
+			// Sort red keys in order to use method binarySearch
 			Arrays.sort(redButton);
-			// 如果操作符在redButton出现
+			// If operation is within red buttons
 			if (Arrays.binarySearch(redButton, nOp[i]) >= 0) {
 				b.setForeground(Color.red);
 			} else {

@@ -2,14 +2,14 @@ package cn.wang.calculator;
 import java.math.BigDecimal;
 
 /**
- * 四则运算类
+ * Basic operations/Calculation module
  */
 public class MyMath {
-	// 保留小数点位数
+	// Digital decimals to be saved
 	public static final int DEFAULT_SCALE = 20;
 
 	/**
-	 * 为一个数字创建BigDecimal对象
+	 * Build object of BigDecimal
 	 * @param number
 	 * @return
 	 */
@@ -18,14 +18,14 @@ public class MyMath {
 	}
 
 	/**
-	 * 加法
+	 * Addition
 	 * 
 	 * @param num1
 	 *            double
 	 * @param num2
 	 *            double
 	 * @param reutrn
-	 *            double 两者相加的结果
+	 *            double result a + b
 	 */
 	public static double add(double num1, double num2) {
 		BigDecimal first = getBigDecimal(num1);
@@ -34,14 +34,14 @@ public class MyMath {
 	}
 
 	/**
-	 * 减法
+	 * Substraction
 	 * 
 	 * @param num1
 	 *            double
 	 * @param num2
 	 *            double
 	 * @param reutrn
-	 *            double 两者相减的结果
+	 *            double result a - b
 	 */
 	public static double subtract(double num1, double num2) {
 		BigDecimal first = getBigDecimal(num1);
@@ -50,14 +50,14 @@ public class MyMath {
 	}
 
 	/**
-	 * 乘法
+	 * Multiplication
 	 * 
 	 * @param num1
 	 *            double
 	 * @param num2
 	 *            double
 	 * @param reutrn
-	 *            double 两者相乘的结果
+	 *            double result a x b
 	 */
 	public static double multiply(double num1, double num2) {
 		BigDecimal first = getBigDecimal(num1);
@@ -66,14 +66,14 @@ public class MyMath {
 	}
 
 	/**
-	 * 除法
+	 * Division
 	 * 
 	 * @param num1
 	 *            double
 	 * @param num2
 	 *            double
 	 * @param reutrn
-	 *            double 两者相除的结果
+	 *            double result a / b
 	 */
 	public static double divide(double num1, double num2) {
 		BigDecimal first = getBigDecimal(num1);
