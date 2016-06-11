@@ -15,11 +15,11 @@ import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 
 /**
- * 界面对象
+ * The view
  * 
  */
 public class CalFrame extends JFrame {
-	// 显示计算结果的textField
+	// Text Field to display result
 	private JTextField textField = null;
 	// 用一个数组保存MC,MR,MS,M+等操作符
 	private String[] mOp = { "MC", "MR", "MS", "M+" };
